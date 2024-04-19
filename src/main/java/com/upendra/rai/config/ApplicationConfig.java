@@ -2,6 +2,7 @@ package com.upendra.rai.config;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -21,7 +22,8 @@ import com.upendra.rai.repositories.UserRepository;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-  private final UserRepository repository;
+  @Autowired
+  private  UserRepository repository;
 
   @Bean
   public UserDetailsService userDetailsService() {
