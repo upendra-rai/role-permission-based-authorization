@@ -43,15 +43,13 @@ public class AuthenticationService {
 	@Autowired
 	private  AuthenticationManager authenticationManager;
 
-	public AuthenticationResponse register(RegisterRequest request) {
+	public String register(RegisterRequest request) {
 		var user = User.builder().firstname(request.getFirstname()).lastname(request.getLastname())
 				.email(request.getEmail()).password(passwordEncoder.encode(request.getPassword()))
 				.role(request.getRole()).build();
-		var savedUser = repository.save(user);
-		var jwtToken = jwtService.generateToken(user);
-		var refreshToken = jwtService.generateRefreshToken(user);
-		saveUserToken(savedUser, jwtToken);
-		return AuthenticationResponse.builder().accessToken(jwtToken).refreshToken(refreshToken).build();
+		 repository.save(user);
+		
+		return "Successfully Registered!!";
 	}
 
 	public AuthenticationResponse authenticate(AuthenticationRequest request) {
